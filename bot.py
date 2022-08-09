@@ -96,7 +96,7 @@ start_msg = """Merhaba {user}!
 `Beni nasıl kullanacağınızı öğrenmek için aşağıdaki butona tıklayın!`"""
 start_buttons = [
     [Button.inline("beni nasıl kullanabilirsin❓", data="helper")],
-    [Button.url("Güncellemeler ", "https://t.me/SancakBotlar")],
+    [Button.url("İLETİŞİM ", "https://t.me/sosyox")],
 ]
 
 
@@ -240,7 +240,7 @@ async def approver(event):
         welcome_msg.get(chat)
         or "Merhaba {name},  katılma isteğiniz başarılı {chat}   {dn}"
     )
-    chat_welcome += "\n /start yazarak daha fazlasını öğrenebilirsiniz ."  # \n\n__**Powered by @SancakBotlar**__"
+    chat_welcome += "\n /start yazarak daha fazlasını öğrenebilirsiniz ."  # \n\n__** Developer 🇹🇷 @SancakBegi**__"
     who = await bot.get_entity(event.user_id)
     chat_ = await bot.get_entity(chat)
     dn = "approved!"
@@ -257,7 +257,7 @@ async def approver(event):
         await bot.send_message(
             event.user_id,
             chat_welcome.format(name=who.first_name, chat=chat_.title, dn=dn),
-            buttons=Button.url("Güncellemeler", url="https://t.me/SancakBotlar"),
+            buttons=Button.url("İletişim", url="https://t.me/sosyox"),
         )
     with contextlib.suppress(errors.rpcerrorlist.UserAlreadyParticipantError):
         await bot(
@@ -267,13 +267,13 @@ async def approver(event):
         )
 
 
-@bot.on(events.NewMessage(incoming=True, from_users=AUTH, pattern="^/stats$"))
+@bot.on(events.NewMessage(incoming=True, from_users=AUTH, pattern="^/panel$"))
 async def auth_(event):
     xx = await event.reply("Calculating...")
     t = await db.get("CHAT_SETTINGS") or "{}"
     t = eval(t)
     await xx.edit(
-        "**Istek Onaylayıcı Bot İstatistikleri**\n\nKullanıcılar : {}\nGruplar eklendi  (değiştirilmiş ayarlarla): {}".format(
+        "**Sosyox Istek Onaylayıcı Bot İstatistikleri**\n\nKullanıcılar : {}\nGruplar eklendi  (değiştirilmiş ayarlarla): {}".format(
             len(await get_all("BOTUSERS")), len(t.keys())
         )
     )
